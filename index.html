@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>他石智慧產權事務所</title>
+<script>document.documentElement.classList.add("js")</script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +14,40 @@ a{color:#8A6A3E;text-decoration:none}
 a:hover{color:#5E4626}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
+/* 申請前須知（電腦版）：每一項各自一條細線，開頭一小段金色，標出四個獨立事項 */
+.ck-item{position:relative}
+.ck-item::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:#45473F}
+.ck-item::after{content:"";position:absolute;left:0;top:0;width:40px;height:1px;background:#C2A877}
+/* ---------- 動態 ---------- */
+:root{--ease-out:cubic-bezier(0.23,1,0.32,1);--ease-io:cubic-bezier(0.77,0,0.175,1)}
+/* 1. 手機底部按鈕：按下回饋 */
+.m-cta{transition:transform 140ms var(--ease-out),filter 140ms ease}
+.m-cta:active{transform:scale(0.97);filter:brightness(.92)}
+/* 5. 頁首電話按鈕：滑鼠移上加深、按下回饋（修正原本 hover 時字變咖啡色） */
+.tel-btn{transition:transform 140ms var(--ease-out),background-color 150ms ease}
+.tel-btn:active{transform:scale(0.97)}
+@media (hover:hover) and (pointer:fine){
+  .tel-btn:hover{background:#3A3D35!important;color:#F6F3EC!important}
+  .tel-round:hover{background:#EDE9E1!important;color:#22251F!important}
+}
+/* 2. 申請前須知：金色線段依序從左畫出（只有線在動，文字一直顯示） */
+.js .ck-item::after{transform:scaleX(0);transform-origin:left;transition:transform 600ms var(--ease-out)}
+.js .ck-item:nth-child(2)::after{transition-delay:80ms}
+.js .ck-item:nth-child(3)::after{transition-delay:160ms}
+.js .ck-item:nth-child(4)::after{transition-delay:240ms}
+.js .is-in .ck-item::after{transform:none}
+/* 3. 跳到 QR code 卡片時，邊框閃一下金色 */
+.qr-card{transition:border-color 400ms ease}
+.qr-card.flash{border-color:#C2A877!important;transition-duration:150ms}
+/* 4. 首屏直書由上往下展開（全頁唯一的開場動畫） */
+.js .v-reveal{animation:v-reveal 900ms var(--ease-io) 200ms both}
+@keyframes v-reveal{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@media (prefers-reduced-motion: reduce){
+  .m-cta:active,.tel-btn:active{transform:none}
+  .js .ck-item::after{transform:none}
+  .js .v-reveal{animation:v-fade 300ms ease both}
+}
+@keyframes v-fade{from{opacity:0}}
 /* 首屏照片輪播：三張淡入淡出，每張約 6 秒 */
 .ts-slide{position:absolute;inset:0;opacity:0;animation:ts-fade 18s ease-in-out infinite both}
 .ts-slide:nth-child(1){animation-delay:-1.08s}
@@ -55,7 +90,7 @@ html{scroll-behavior:smooth}
         <a href="#about" style="color:#22251F">關於本所</a>
         <a href="#checklist" style="color:#22251F">申請前須知</a>
         <a href="#contact" style="color:#22251F">聯絡我們</a>
-        <a href="tel:0225238365" style="display:flex;align-items:center;gap:10px;padding:12px 22px;background:#22251F;color:#F6F3EC;letter-spacing:.12em;white-space:nowrap;flex-shrink:0">
+        <a class="tel-btn" href="tel:0225238365" style="display:flex;align-items:center;gap:10px;padding:12px 22px;background:#22251F;color:#F6F3EC;letter-spacing:.12em;white-space:nowrap;flex-shrink:0">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>02-2523-8365
         </a>
       </nav>
@@ -69,7 +104,7 @@ html{scroll-behavior:smooth}
       </div>
       <div style="display:flex;align-items:flex-start;gap:36px">
         <h1 style="margin:0;font-family:'Noto Serif TC',serif;font-weight:700;font-size:clamp(120px,13vw,200px);line-height:.92;letter-spacing:.04em">他<br>石</h1>
-        <div style="writing-mode:vertical-rl;font-family:'Noto Serif TC',serif;font-size:24px;letter-spacing:.5em;color:#4A4A40;padding-top:20px;border-right:1px solid #CFC6B4;padding-right:16px">他日未來的基石</div>
+        <div class="v-reveal" style="writing-mode:vertical-rl;font-family:'Noto Serif TC',serif;font-size:24px;letter-spacing:.5em;color:#4A4A40;padding-top:20px;border-right:1px solid #CFC6B4;padding-right:16px">他日未來的基石</div>
       </div>
       <p style="margin:0;max-width:30em;font-family:'Noto Serif TC',serif;font-size:21px;line-height:2;letter-spacing:.06em;text-wrap:pretty">他石智慧產權事務所，他石寓意著商標是他日未來的基石，自1998年起專注於商標的快速申請。</p>
     </div>
@@ -90,20 +125,20 @@ html{scroll-behavior:smooth}
         </div>
         <h2 style="margin:0;font-family:'Noto Serif TC',serif;font-weight:600;font-size:32px;line-height:1.6;letter-spacing:.06em;text-wrap:pretty">打算註冊商標時，應在申請前查詢了解的事項：</h2>
       </div>
-      <div style="grid-column:1/-1;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));border-top:1px solid #45473F">
-        <div style="display:flex;flex-direction:column;gap:20px;padding:32px 32px 40px 0;border-bottom:1px solid #45473F">
+      <div style="grid-column:1/-1;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:40px 32px">
+        <div class="ck-item" style="display:flex;flex-direction:column;gap:20px;padding:32px 0 0">
           <span style="font-family:'Cormorant Garamond',serif;font-size:44px;color:#C2A877;line-height:1">01</span>
-          <span style="font-size:19px;line-height:1.7;letter-spacing:.04em">商標圖樣是否符合申請的條件？</span>
+          <span style="font-size:19px;line-height:1.7;letter-spacing:.04em">商標圖樣是否<span style="white-space:nowrap">符合申請的條件？</span></span>
         </div>
-        <div style="display:flex;flex-direction:column;gap:20px;padding:32px 32px 40px 0;border-bottom:1px solid #45473F">
+        <div class="ck-item" style="display:flex;flex-direction:column;gap:20px;padding:32px 0 0">
           <span style="font-family:'Cormorant Garamond',serif;font-size:44px;color:#C2A877;line-height:1">02</span>
           <span style="font-size:19px;line-height:1.7;letter-spacing:.04em">送件後多久能取得註冊？</span>
         </div>
-        <div style="display:flex;flex-direction:column;gap:20px;padding:32px 32px 40px 0;border-bottom:1px solid #45473F">
+        <div class="ck-item" style="display:flex;flex-direction:column;gap:20px;padding:32px 0 0">
           <span style="font-family:'Cormorant Garamond',serif;font-size:44px;color:#C2A877;line-height:1">03</span>
           <span style="font-size:19px;line-height:1.7;letter-spacing:.04em">規費多少？代辦費多少？</span>
         </div>
-        <div style="display:flex;flex-direction:column;gap:20px;padding:32px 32px 40px 0;border-bottom:1px solid #45473F">
+        <div class="ck-item" style="display:flex;flex-direction:column;gap:20px;padding:32px 0 0">
           <span style="font-family:'Cormorant Garamond',serif;font-size:44px;color:#C2A877;line-height:1">04</span>
           <span style="font-size:19px;line-height:1.7;letter-spacing:.04em">註冊不准時會退還代辦費嗎？</span>
         </div>
@@ -121,7 +156,7 @@ html{scroll-behavior:smooth}
         <span style="width:9px;height:9px;border-radius:50%;background:#06C755"></span>LINE 掃碼諮詢，加入好友，專人回覆
       </div>
     </div>
-    <div style="justify-self:center;display:flex;flex-direction:column;align-items:center;gap:16px;padding:36px 48px;border:1px solid #DDD6C8;background:#FBF9F4">
+    <div class="qr-card" style="justify-self:center;display:flex;flex-direction:column;align-items:center;gap:16px;padding:36px 48px;border:1px solid #DDD6C8;background:#FBF9F4">
       <div style="width:240px;height:240px;background:#fff;padding:12px;border:1px solid #E5DFD2">
         <div data-qr="A" style="width:100%;height:100%;display:grid;place-items:center;border:1px dashed #CFC6B4;color:#9C9789;font-size:13px;letter-spacing:.1em">LINE QR code A</div>
         <div data-qr="B" style="width:100%;height:100%;display:grid;place-items:center;border:1px dashed #CFC6B4;color:#9C9789;font-size:13px;letter-spacing:.1em">LINE QR code B</div>
@@ -168,7 +203,7 @@ html{scroll-behavior:smooth}
         <div style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.28em;color:#7B7466">TIME STONE · SINCE 1998</div>
       </div>
     </div>
-    <a href="tel:0225238365" style="display:grid;place-items:center;width:44px;height:44px;border:1px solid #CFC6B4;border-radius:50%;color:#22251F" aria-label="來電">
+    <a class="tel-btn tel-round" href="tel:0225238365" style="display:grid;place-items:center;width:44px;height:44px;border:1px solid #CFC6B4;border-radius:50%;color:#22251F" aria-label="來電">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
     </a>
   </header>
@@ -181,7 +216,7 @@ html{scroll-behavior:smooth}
         </div>
         <h1 style="margin:0;font-family:'Noto Serif TC',serif;font-weight:700;font-size:clamp(64px,22vw,112px);line-height:.95;letter-spacing:.04em">他<br>石</h1>
       </div>
-      <div style="writing-mode:vertical-rl;font-family:'Noto Serif TC',serif;font-size:19px;letter-spacing:.42em;color:#4A4A40;padding-top:38px;border-right:1px solid #CFC6B4;padding-right:12px">他日未來的基石</div>
+      <div class="v-reveal" style="writing-mode:vertical-rl;font-family:'Noto Serif TC',serif;font-size:19px;letter-spacing:.42em;color:#4A4A40;padding-top:38px;border-right:1px solid #CFC6B4;padding-right:12px">他日未來的基石</div>
     </div>
     <div style="margin-top:28px;position:relative;height:240px">
       <div style="position:relative;width:100%;height:100%;overflow:hidden"><div class="ts-slide"><img src="img/courtyard-1536.webp" srcset="img/courtyard-768.webp 768w, img/courtyard-1536.webp 1536w" sizes="(min-width: 900px) 50vw, 100vw" width="1536" height="1024" alt="清水模中庭裡的一塊石頭" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="ts-slide"><img src="img/seal-1536.webp" srcset="img/seal-768.webp 768w, img/seal-1536.webp 1536w" sizes="(min-width: 900px) 50vw, 100vw" width="1536" height="1024" alt="壓印「他石」圓形標誌的紙卡" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div><div class="ts-slide"><img src="img/wall-1536.webp" srcset="img/wall-768.webp 768w, img/wall-1536.webp 1536w" sizes="(min-width: 900px) 50vw, 100vw" width="1536" height="1024" alt="牆上直書「他石」" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div></div>
@@ -227,7 +262,7 @@ html{scroll-behavior:smooth}
     </div>
     <h2 style="margin:18px 0 28px;font-family:'Noto Serif TC',serif;font-weight:600;font-size:23px;letter-spacing:.08em">本所查詢專線</h2>
 
-    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:28px 20px;border:1px solid #DDD6C8;background:#FBF9F4">
+    <div class="qr-card" style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:28px 20px;border:1px solid #DDD6C8;background:#FBF9F4">
       <div style="display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.2em;color:#4A4A40">
         <span style="width:8px;height:8px;border-radius:50%;background:#06C755"></span>LINE 掃碼諮詢
       </div>
@@ -258,10 +293,10 @@ html{scroll-behavior:smooth}
   </section>
 
   <nav style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#22251F;padding-bottom:env(safe-area-inset-bottom)">
-    <a href="tel:0225238365" style="display:flex;align-items:center;justify-content:center;gap:10px;height:60px;color:#F6F3EC;font-size:15px;letter-spacing:.2em;background:#22251F">
+    <a class="m-cta" href="tel:0225238365" style="display:flex;align-items:center;justify-content:center;gap:10px;height:60px;color:#F6F3EC;font-size:15px;letter-spacing:.2em;background:#22251F">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>來電詢問
     </a>
-    <a href="#m-contact" style="display:flex;align-items:center;justify-content:center;gap:10px;height:60px;color:#22251F;font-size:15px;letter-spacing:.2em;background:#C2A877;font-weight:500">LINE 諮詢 →</a>
+    <a class="m-cta" href="#m-contact" style="display:flex;align-items:center;justify-content:center;gap:10px;height:60px;color:#22251F;font-size:15px;letter-spacing:.2em;background:#C2A877;font-weight:500">LINE 諮詢 →</a>
   </nav>
 </div>
 </div>
@@ -291,6 +326,30 @@ html{scroll-behavior:smooth}
     }
     loadMaps();
     mq.addEventListener('change', loadMaps);
+  })();
+</script>
+<script>
+  // 動態：申請前須知線段在進入畫面時畫出；跳到 QR 卡片時閃一下
+  (function () {
+    var list = document.querySelector('.ck-item') && document.querySelector('.ck-item').parentElement;
+    if (list && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { list.classList.add('is-in'); io.disconnect(); } });
+      }, { threshold: 0.3 });
+      io.observe(list);
+    } else if (list) { list.classList.add('is-in'); }
+
+    document.querySelectorAll('a[href="#contact"], a[href="#m-contact"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var target = document.querySelector(a.getAttribute('href'));
+        var card = target && target.querySelector('.qr-card');
+        if (!card) return;
+        setTimeout(function () {
+          card.classList.add('flash');
+          setTimeout(function () { card.classList.remove('flash'); }, 600);
+        }, 650); // 等平滑捲動大致結束
+      });
+    });
   })();
 </script>
 </body></html>
