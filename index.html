@@ -175,7 +175,7 @@ h1 em{font-style:normal;color:var(--ochre-ink)}  /* 斜向交錯：快速「申�
   .head-actions{display:none}
   .brand{gap:3px}
   .name{font-size:min(6.6vw,27px);letter-spacing:.08em}
-  .name-en{font-size:10px;letter-spacing:.1em}
+  .name-en{font-size:10px;letter-spacing:.08em;color:var(--ink-2)}
   .addr{font-size:13.5px;letter-spacing:.02em;margin-top:3px}
 
   /* 選單按鈕與面板 */
@@ -195,6 +195,9 @@ h1 em{font-style:normal;color:var(--ochre-ink)}  /* 斜向交錯：快速「申�
   /* 照片：從畫面頂端鋪到主標下方，壓印圓章落在右側，往下淡出 */
   .visual{top:0;left:0;right:0;bottom:auto;height:350px;-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent 100%);mask-image:linear-gradient(180deg,#000 50%,transparent 100%)}
   .visual img{height:100%;object-position:16% 0}
+  /* 頂部紙色漸層：提亮 Header 底下的照片陰影，讓小字清楚；無邊界，照片仍連到主標 */
+  .page::after{content:"";position:absolute;left:0;right:0;top:0;z-index:-1;height:calc(var(--vis-top,130px) + 40px);pointer-events:none;
+    background:linear-gradient(180deg,rgba(245,241,233,.85) 0%,rgba(245,241,233,.72) 58%,rgba(245,241,233,0) 100%)}
   .visual::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,241,233,.82) 0%,rgba(245,241,233,.5) 45%,rgba(245,241,233,0) 75%)}
   /* 整頁底紋：同一張圖左側的樹影與紙紋，低對比鋪滿，讓卡片與按鈕後面也有材質 */
   .page::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(rgba(245,241,233,.55),rgba(245,241,233,.62)),url(img/seal-768.webp) 0% 60%/cover no-repeat}
