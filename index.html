@@ -84,6 +84,7 @@ svg{display:block}
 .tagline{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;font-size:clamp(16px,1.35vw,19px);letter-spacing:.3em;color:var(--ochre-ink)}
 .tagline::before{content:"";width:28px;height:2px;background:var(--ochre)}
 h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,min(8.4vh,5vw),76px);line-height:1.12;letter-spacing:.04em;white-space:nowrap;margin-left:-.05em;color:var(--ink)}
+h1 em{font-style:normal;color:var(--ochre-ink)}  /* 斜向交錯：快速「申請」／「商標」註冊 */
 
 /* 創立年份 */
 .year{align-self:start;margin-top:6px;display:grid;grid-template-columns:auto auto;align-items:end;column-gap:8px;row-gap:6px;text-align:right}
@@ -120,14 +121,14 @@ h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,min(8.4vh,5vw
 .btn:focus-visible,.head-tel:focus-visible{outline:2px solid var(--ochre);outline-offset:3px}
 .btn-line{background:var(--line)}
 /* 來電＝次要按鈕：墨綠描邊（與 1998、問題標題同一品牌色），跟半透明的問題卡片明確區分 */
-.btn-tel{background:#FBFAF6;color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
-.btn-tel:active{background:#ECE8DF;box-shadow:inset 0 0 0 1.5px var(--green)}  /* 按下時保留外框 */
+.btn-tel{background:rgba(251,250,246,.35);-webkit-backdrop-filter:blur(8px) saturate(1.1);backdrop-filter:blur(8px) saturate(1.1);color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
+.btn-tel:active{background:rgba(236,232,223,.75);box-shadow:inset 0 0 0 1.5px var(--green)}  /* 按下時保留外框 */
 .btn-sm{height:42px;padding:0 16px;font-size:15.5px;gap:8px;border-radius:6px}
 .btn-sm svg{width:18px;height:18px}
 .btn-sm.btn-line svg{width:20px;height:20px}
 @media (hover:hover) and (pointer:fine){
   .btn-line:hover{background:var(--line-hover);box-shadow:0 8px 18px -10px rgba(8,132,63,.7)}
-  .btn-tel:hover{background:#ECE8DF;box-shadow:inset 0 0 0 1.5px var(--green)}
+  .btn-tel:hover{background:rgba(236,232,223,.6);box-shadow:inset 0 0 0 1.5px var(--green)}
   .btn:hover svg{transform:scale(1.06)}
   .btn-sm:hover{box-shadow:none}
   .head-tel:hover{color:var(--ochre-ink)}
@@ -198,8 +199,9 @@ h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,min(8.4vh,5vw
   /* 整頁底紋：同一張圖左側的樹影與紙紋，低對比鋪滿，讓卡片與按鈕後面也有材質 */
   .page::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(rgba(245,241,233,.55),rgba(245,241,233,.62)),url(img/seal-768.webp) 0% 60%/cover no-repeat}
 
-  .stage{align-self:start;padding:clamp(30px,7vh,64px) var(--px) max(20px,env(safe-area-inset-bottom));grid-template-columns:minmax(0,1fr) auto;
-    grid-template-areas:"svc svc" "q year" "tiles tiles" "cta cta";column-gap:12px;align-items:end}
+  /* 高螢幕多出來的高度：主要給主標與問題之間（照片區呼吸），少量給卡片與按鈕之間；按鈕貼近底部。矮螢幕兩段為 0。 */
+  .stage{align-self:stretch;padding:clamp(30px,7vh,64px) var(--px) max(24px,env(safe-area-inset-bottom));grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"svc svc" ". ." "q year" "tiles tiles" ". ." "cta cta";grid-template-rows:auto minmax(0,1fr) auto auto minmax(0,.35fr) auto;column-gap:12px;align-items:end}
   .group,.faq{display:contents}
   .svc{grid-area:svc;gap:8px}
   .tagline{font-size:14px;letter-spacing:.24em;gap:8px}
@@ -216,7 +218,7 @@ h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,min(8.4vh,5vw
   .year::after{width:40px;margin-top:6px}
 
   .faq-list{grid-area:tiles;gap:10px}
-  .tile{min-height:72px;padding:14px 16px;font-size:min(4.2vw,16.5px);line-height:1.45;letter-spacing:0;background:rgba(232,228,219,.8);box-shadow:inset 0 0 0 1px rgba(36,37,33,.06),0 8px 16px -12px rgba(36,37,33,.35)}
+  .tile{min-height:clamp(72px,10.5vh,100px);padding:14px 16px;font-size:min(4.2vw,16.5px);line-height:1.45;letter-spacing:0;background:rgba(232,228,219,.8);box-shadow:inset 0 0 0 1px rgba(36,37,33,.06),0 8px 16px -12px rgba(36,37,33,.35)}
 
   /* 按鈕：上下疊，同一種元件——圖示＋一行文字置中，右側 ›；LINE 為主（綠底）、來電為次（描邊） */
   .cta{grid-area:cta;display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:14px}
@@ -230,11 +232,11 @@ h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,min(8.4vh,5vw
   .b-main{font-size:18px;font-weight:700}
   .btn-line{color:#fff}
   .btn-line:active{background:var(--line-hover)}
-  .btn-tel{background:#FBFAF6;color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
+  .btn-tel{background:rgba(251,250,246,.35);-webkit-backdrop-filter:blur(8px) saturate(1.1);backdrop-filter:blur(8px) saturate(1.1);color:var(--green);box-shadow:inset 0 0 0 1.5px var(--green)}
   .btn-tel .b-ico svg{color:var(--green)}
   .tel-lbl{font-size:16px;font-weight:500;letter-spacing:.04em}
   .tel-num{display:inline;font-size:18px;font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums;color:var(--green)}
-  .btn-tel:active{background:#ECE8DF;box-shadow:inset 0 0 0 1.5px var(--green)}
+  .btn-tel:active{background:rgba(236,232,223,.75);box-shadow:inset 0 0 0 1.5px var(--green)}
   /* 卡片固定依語意斷成兩行，四張節奏一致 */
   .tile .nb{display:block}
   .qr{display:none}
@@ -275,7 +277,7 @@ h1{font-family:var(--display);font-weight:900;font-size:clamp(44px,min(8.4vh,5vw
     <main class="group">
       <section class="svc">
         <p class="tagline">他日商業的基石</p>
-        <h1><span>快速申請</span><span>商標註冊</span></h1>
+        <h1><span>快速<em>申請</em></span><span><em>商標</em>註冊</span></h1>
       </section>
 
       <section class="faq">
